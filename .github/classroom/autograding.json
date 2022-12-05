@@ -1,0 +1,54 @@
+{
+  "tests": [
+    {
+      "name": "Test A",
+      "setup": "sudo -H pip3 install -r requirements.txt",
+      "run": "pytest -k \"test_A\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+     {
+      "name": "Test B",
+      "setup": "sudo -H pip3 install -r requirements.txt",
+      "run": "pytest -k \"test_B\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+     {
+      "name": "Test C",
+      "setup": "sudo -H pip3 install -r requirements.txt",
+      "run": "pytest -k \"test_C\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+     {
+      "name": "Test D",
+      "setup": "sudo -H pip3 install -r requirements.txt",
+      "run": "pytest -k \"test_D\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+     {
+      "name": "Test E",
+      "setup": "sudo -H pip3 install -r requirements.txt",
+      "run": "pytest -k \"test_E\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    }
+  ]
+}
