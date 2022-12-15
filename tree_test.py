@@ -27,7 +27,7 @@ def test_B(monkeypatch, capsys):
     if len(captured.out) >= 2 and  captured.out[-2] == '|':
         print('Step 4')
         assert captured.out == '....*\n...***\n..*****\n.*******\n*********\n....|\n'
-    elif captured.out[0:5] == '....*' and captured.out[-3] == '.*\n':
+    elif captured.out[0:5] == '....*' and captured.out[-3:] == '.*\n':
         print('Step 3')
         assert captured.out == '....*\n...***\n..*****\n.*******\n*********\n'
     elif captured.out[0:5] == '....\n':
