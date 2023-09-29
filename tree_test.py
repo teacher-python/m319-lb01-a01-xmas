@@ -5,7 +5,7 @@ import pytest
 import tree as tree
 
 
-def test_A(find_step, monkeypatch, capsys):
+def test_a(find_step, monkeypatch, capsys):
     inputs = iter(['1'])
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
     tree.make_tree()
@@ -19,8 +19,7 @@ def test_A(find_step, monkeypatch, capsys):
         assert output == "\n"
 
 
-
-def test_B(find_step, monkeypatch, capsys):
+def test_b(find_step, monkeypatch, capsys):
     inputs = iter(['5'])
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
     tree.make_tree()
@@ -35,7 +34,7 @@ def test_B(find_step, monkeypatch, capsys):
         assert captured.out == "\n\n\n\n\n"
 
 
-def test_C(find_step, monkeypatch, capsys):
+def test_c(find_step, monkeypatch, capsys):
     if find_step == 1:
         pytest.skip('Skipping this test for step 1')
     inputs = iter(['3'])
@@ -49,7 +48,8 @@ def test_C(find_step, monkeypatch, capsys):
     else:
         assert captured.out == '..\n.\n\n'
 
-def test_D(find_step, monkeypatch, capsys):
+
+def test_d(find_step, monkeypatch, capsys):
     if find_step <= 2:
         pytest.skip('Skipping this test for step 1 & 2')
     inputs = iter(['4'])
@@ -61,7 +61,8 @@ def test_D(find_step, monkeypatch, capsys):
     else:
         assert captured.out == '...*\n..***\n.*****\n*******\n'
 
-def test_E(find_step, monkeypatch, capsys):
+
+def test_e(find_step, monkeypatch, capsys):
     if find_step < 4:
         pytest.skip('Skipping this test for step 1-3')
     inputs = iter(['7'])
@@ -70,23 +71,28 @@ def test_E(find_step, monkeypatch, capsys):
     captured = capsys.readouterr()
     assert captured.out == '......*\n.....***\n....*****\n...*******\n..*********\n.***********\n*************\n......|\n'
 
+
 @pytest.fixture
 def find_step(monkeypatch, capsys):
     inputs = iter(['3'])
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
     tree.make_tree()
     output = capsys.readouterr().out
-    if output[0] == '\n':
-        step = 1
-    elif output[0:3] == '..\n':
-        step =  2
-    elif output[0:4] == '..*\n' and output[-2] != '|':
-        step = 3
-    elif output[0:4] == '..*\n' and output[-2] == '|':
+    if output == '':
+        step = 0
+        print('Your program doesn\'t produce any output. No tests possible', file=sys.stderr)
+        pytest.exit('Your program doesn\'t produce any output. No tests possible')
+    elif '*' in output and '|' in output:
         step = 4
+    elif '*' in output:
+        step = 3
+    elif '.' in output:
+        step = 2
+    elif output[0] == '\n':
+        step = 1
     else:
-        print ('Cannot determine the step you are working on.', file=sys.stderr)
-        return 4
+        print('Cannot determine the step you are working on.', file=sys.stderr)
+        step = 4
 
-    print (f'Executing tests for step {step}', file=sys.stderr)
+    print(f'Executing tests for step {step}', file=sys.stderr)
     return step

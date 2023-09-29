@@ -3,7 +3,7 @@ def make_tree():
     prints an Xmas tree
     :return: None
     """
-    step1()
+    step3()
 
 def step1():
     height = int(input('Höhe des Baums'))
