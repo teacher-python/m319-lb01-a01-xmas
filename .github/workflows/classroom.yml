@@ -1,16 +1,17 @@
 name: GitHub Classroom Workflow
 
-on: [push]
+on: push
 
 permissions:
   checks: write
+  issues: write
   actions: read
   contents: read
 
 jobs:
-  build:
-    name: Autograding
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: education/autograding@v1
+  grading:
+    if: ${{ !contains(github.actor, 'classroom') }}
+    uses: BZZ-Commons/workflows/.github/workflows/grading.yml@main
+    with:
+      MOODLE: true  # CHANGE true=export grade to moodle
+    secrets: inherit
